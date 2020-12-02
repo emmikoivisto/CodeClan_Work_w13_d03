@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +18,10 @@ public class DistilleryController {
     DistilleryRepository distilleryRepository;
 
     @GetMapping(value = "/distilleries")
-    public ResponseEntity<List<Distillery>> getAllDistilleries(){
+    public ResponseEntity<List<Distillery>> getAllDistilleries(@RequestParam (value = "region", required = false) String region){
+        if (region != null){
+            return new ResponseEntity<>(distilleryRepository.findByRegion(region), HttpStatus.OK);
+        }
         return new ResponseEntity<>(distilleryRepository.findAll(), HttpStatus.OK);
     }
 
