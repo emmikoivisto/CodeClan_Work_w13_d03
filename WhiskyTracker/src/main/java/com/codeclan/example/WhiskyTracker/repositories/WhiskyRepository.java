@@ -1,5 +1,6 @@
 package com.codeclan.example.WhiskyTracker.repositories;
 
+import com.codeclan.example.WhiskyTracker.models.Distillery;
 import com.codeclan.example.WhiskyTracker.models.Whisky;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -9,6 +10,9 @@ public interface WhiskyRepository extends JpaRepository<Whisky, Long> {
 
     List<Whisky> findByYear(Integer year);
 
-    List<Whisky> findByDistilleryAndAge(String distillery, Integer age);
+    List<Whisky> findByDistilleryName(String distilleryName);
+    List<Whisky> findByAge(Integer age);
+    List<Whisky> findByDistilleryRegion(String distilleryRegion);
+    List<Whisky> findByDistilleryNameAndAge(String distilleryName, Integer age);
 
 }
